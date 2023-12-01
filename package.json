@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-web-app",
+  "version": "1.0.0",
+  "description": "Web application using pure NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/alexsandro-silva/nodejs-web-app.git"
+  },
+  "author": "Alexsandro Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexsandro-silva/nodejs-web-app/issues"
+  },
+  "homepage": "https://github.com/alexsandro-silva/nodejs-web-app#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
