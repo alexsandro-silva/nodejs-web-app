@@ -12,10 +12,12 @@ class Router {
 
     get(uri, controller) {
         this.addRoute('GET', uri, controller);
+        return this;
     }
 
     post(uri, controller) {
         this.addRoute('POST', uri, controller);
+        return this;
     }
 }
 

@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
 const Router = require('./src/app/core/router');
+const view = require('./src/app/core/view');
 
 const router = new Router();
 
@@ -8,11 +9,18 @@ router.get('/', (request, response) => {
     let res = new Response('hello');
     response.writeHead(200);
     response.write("Hello, world!!");
-});
+}).get('/greetings', (request, response) => {
 
-router.get('/greetings', (request, response) => {
     response.writeHead(200, { 'Content-type': 'text/html' });
-    response.write('<h1>Greetings from the web!</h1>');
+    try {
+        response.write(view.renderView('index', {
+            title: 'Greetings',
+            greetings: 'Hello, everyone!!'
+        }));
+    } catch (error) {
+        response.writeHead(404, error.message);
+    }
+
 })
 
 const app = http.createServer();
