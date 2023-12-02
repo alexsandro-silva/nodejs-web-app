@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const renderView = (view, data) => {
-    let viewPath = path.resolve(__dirname, '../resources/views/' + view + '.html');
+    let viewPath = path.resolve(__dirname, '../resources/pages/' + view + '.html');
 
     if (!fs.existsSync(viewPath)) {
         throw new Error('View not found. Path: ' + viewPath);

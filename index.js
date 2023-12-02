@@ -6,7 +6,6 @@ const view = require('./src/app/core/view');
 const router = new Router();
 
 router.get('/', (request, response) => {
-    let res = new Response('hello');
     response.writeHead(200);
     response.write("Hello, world!!");
 }).get('/greetings', (request, response) => {
@@ -21,7 +20,17 @@ router.get('/', (request, response) => {
         response.writeHead(404, error.message);
     }
 
-})
+});
+
+router.get('/user/:id', (req, res) => {
+    res.writeHead(200, { 'Content-type': 'text/html'});
+    res.write('User');
+});
+
+router.get('/user/:id/address/:id', (req, res) => {
+    res.writeHead(200, { 'Content-type': 'text/html'});
+    res.write('User');
+});
 
 const app = http.createServer();
 
