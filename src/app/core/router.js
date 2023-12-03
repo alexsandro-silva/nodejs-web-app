@@ -1,3 +1,6 @@
+const RouteNotFound = require("../errors/route-not-found-error");
+const httpStatus = require("./httpStatus");
+
 class Router {
     routes = [];
 
@@ -10,6 +13,7 @@ class Router {
     addRoute(method, uri, controller) {
         let uriPattern = uri.replace(/(:\w+)/g, "(\\w+)");
         this.routes.push({ method, uri: new RegExp(uriPattern + '$'), controller });
+        //console.log(this.routes);
     }
 
     /**
@@ -19,12 +23,17 @@ class Router {
      * @returns Route object
      */
     getRoute(method, uri) {
-        const route = this.routes.find((route) => route.method === method && route.uri.test(uri));
-        console.log('regexp: ' + route.uri);
-        const uriParams = uri.match(route.uri) || [];
-        console.log(uriParams);
-        console.log('tamanho: ' + uriParams.length);
-        return route;
+        let route = this.routes.find((route) => route.method === method && route.uri.test(uri));
+        if (route) {
+            const uriParams = uri.match(route.uri) || [];
+            uriParams.shift(); //remove first element
+            route = {...route, params: [...uriParams]};
+            //console.log(route);
+            //console.log('tamanho: ' + uriParams.length);
+            return route;    
+        }
+
+        throw new RouteNotFound('Route not found');
     }
 
     get(uri, controller) {
